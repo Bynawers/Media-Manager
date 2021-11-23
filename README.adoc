@@ -41,7 +41,8 @@ Le projet initial est géré avec `cargo` et est structuré en plusieurs modules
 +
 .Répondre ici
 ....
-Bibliothèque 1 : ...
+Bibliothèque 1 : structopt
+Bibliothèque 2 : walkdir
 ....
 . Expliquez le rôle de chacun des modules/fichiers du projet et examinez attentivement les exportations (mot-clé `pub`)
 +

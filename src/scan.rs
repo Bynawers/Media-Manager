@@ -21,3 +21,4 @@ pub fn scan(path: &Path) -> Vec<MusicFile> {
     };
     music_files
 }
+
