@@ -12,6 +12,7 @@ pub struct MusicFile {
     pub album_artist: Option<String>,
 }
 
+/*Sauvegarde de variables dans un fichier json*/
 pub fn save(music_file: Vec<MusicFile>) -> serde_json::value::Value{
     let serialized = music_file.serialize(serde_json::value::Serializer).unwrap();
     
@@ -25,6 +26,7 @@ pub fn save(music_file: Vec<MusicFile>) -> serde_json::value::Value{
     serialized
 }
 
+/*Chargement de variables à partir d'un fichier json*/
 pub fn load() -> Option<Vec<MusicFile>> {
     let file_value_res = fs::read_to_string("./data.json");
     match file_value_res {

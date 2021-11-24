@@ -61,7 +61,6 @@ Fichiers:
 result.md: Fichier Markdown contenant le résultat de la requête.
 data.json: Fichier de sérialisation, contenant la sauvegarde du dossier scanné.
 
-
 == Structure de données initiale pour les fichiers audio
 Dans un premier temps, seuls les fichiers audio seront pris en compte.
 
@@ -126,3 +125,5 @@ Pour la généralisation, vous pouvez vous restreindre à un sous-ensemble des f
 ** https://crates.io/crates/pancurses[pancurses] pour créer une IHM dans le terminal
 ** https://crates.io/crates/terminal_cli[terminal_cli] pour créer un appli CLI nteractive
 ** https://crates.io/crates/walkdir[walkdir] / https://github.com/rust-lang-nursery/lob[glob] pour chercher des fichiers dans le FS
+ 
+ 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

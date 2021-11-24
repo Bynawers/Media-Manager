@@ -97,4 +97,17 @@ mod test {
 
         assert_eq!(request.len(), 0);
     }
+
+    #[test]
+    fn search_all() {
+        
+        let music_data: Option<Vec<MusicFile>> = load();
+
+        let mut line: Vec<String> = Vec::new();
+        line.push("all".to_string());
+
+        let request = medman::search::search_args(&line, &music_data.expect("no music data"));
+
+        assert_eq!(request.len(), 7);
+    }
 }
