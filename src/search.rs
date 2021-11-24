@@ -1,12 +1,13 @@
 use crate::musicfile::MusicFile;
 
+/*Fonction principal qui à partir de la ligne de commande, renvoi un nouveau vecteur musicFile
+contenant les données des musiques des requêtes*/
 pub fn search_args(line: &[String], music_data: &[MusicFile]) -> Vec<MusicFile> {
 
     let mut request_data: Vec<MusicFile> = Vec::new();
     let mut is_command: bool = true;
-    let mut index: usize = 0;
 
-    for command_value in line.iter() {
+    for (index, command_value) in line.iter().enumerate() {
 
         match is_command {
 
@@ -16,7 +17,7 @@ pub fn search_args(line: &[String], music_data: &[MusicFile]) -> Vec<MusicFile> 
                     break;
                 }
                 else if line.contains(&"AND".to_string()) {
-                    struct_request(&mut request_data, music_data, &line);
+                    struct_request(&mut request_data, music_data, line);
                     break;
                 }
                 is_command = false;
@@ -27,11 +28,11 @@ pub fn search_args(line: &[String], music_data: &[MusicFile]) -> Vec<MusicFile> 
                 is_command = true;
             }
         }
-        index += 1;
     }
     request_data
 }
 
+/* Modifie le vecteur d'entré request_data pour lui donnée une copie de la base de donnée music_data*/
 fn data_all(music_data: &[MusicFile], request_data: &mut Vec<MusicFile>) {
 
     for elem in music_data.iter() {
@@ -39,6 +40,7 @@ fn data_all(music_data: &[MusicFile], request_data: &mut Vec<MusicFile>) {
     }
 }
 
+/* Modifie le vecteur d'entré request_data contenant les données MusicFile des requêtes du terminal cmd et request*/
 fn data_music(request: &String, music_data: &[MusicFile], request_data: &mut Vec<MusicFile>, cmd: &str) {
     
     for elem in music_data.iter() {
@@ -75,6 +77,8 @@ fn data_music(request: &String, music_data: &[MusicFile], request_data: &mut Vec
         }
     }
 }
+/* Créer un tuple contenant toutes les demandes possible de AND ("TITLE/ARTIST...")
+et appel la fonction tuple_to_index */
 fn struct_request(request_data: &mut Vec<MusicFile>,music_data: &[MusicFile], line: &[String]) {
 
     let mut request: (Option<String>, Option<String>, 
@@ -100,14 +104,15 @@ fn struct_request(request_data: &mut Vec<MusicFile>,music_data: &[MusicFile], li
                 None => request.3 = Some((line[i+1]).parse::<i32>().unwrap()),
                 Some(_) => ()
             }
-            "AND" => {()}
             _ => ()
         }
     }
-    struct_to_index(request_data, music_data, request);
+    tuple_to_index(request_data, music_data, request);
 }
 
-fn struct_to_index(request_data: &mut Vec<MusicFile>, music_data: &[MusicFile], request: (Option<String>, Option<String>, Option<String>, Option<i32>)) {
+/* Récupères le tuples crée contenant les informations de requêtes et renvoi un Vecteur de bool
+(un élement de ce vecteur est vrai si tout les informations de tuples sont équivalente aux données de l'élement) */
+fn tuple_to_index(request_data: &mut Vec<MusicFile>, music_data: &[MusicFile], request: (Option<String>, Option<String>, Option<String>, Option<i32>)) {
 
     let mut index_list = vec![true; music_data.len()];
 
@@ -145,10 +150,11 @@ fn struct_to_index(request_data: &mut Vec<MusicFile>, music_data: &[MusicFile], 
     index_to_data(request_data, music_data, index_list);
 }
 
+/* A partir de l'index récupéré, génère un nouveau vecteur request_data*/
 fn index_to_data(request_data: &mut Vec<MusicFile>, music_data: &[MusicFile], index_list: Vec<bool>){
 
     for (i, elem) in index_list.iter().enumerate() {
-        if *elem == true {
+        if *elem {
             request_data.push(MusicFile::new(&music_data[i as usize].path));
         }
     }

@@ -24,7 +24,7 @@ fn main() {
             match &music_data{
                 None => (),
                 Some(_data_file) =>{
-                    let request_data = medman::search::search_args(&line, &music_data.as_ref().expect("no music data"));
+                    let request_data = medman::search::search_args(&line, music_data.as_ref().expect("no music data"));
                     medman::write2md::write_result(request_data);
                 }
             }
@@ -68,7 +68,7 @@ mod test {
     }
 
     #[test]
-    fn search_music_with_AND() {
+    fn search_music_with_and() {
         
         let music_data: Option<Vec<MusicFile>> = load();
 
@@ -91,7 +91,7 @@ mod test {
         
         let music_data: Option<Vec<MusicFile>> = load();
 
-        let mut line: Vec<String> = Vec::new();
+        let line: Vec<String> = Vec::new();
 
         let request = medman::search::search_args(&line, &music_data.expect("no music data"));
 

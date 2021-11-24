@@ -38,19 +38,29 @@ Enfin, le sujet est volontairement peu contraignant afin de vous laisser propose
 Le projet initial est géré avec `cargo` et est structuré en plusieurs modules et fichiers.
 
 . Quelles bibliothèques externes sont utilisées dans le projet ? Expliquez en une phrase leur utilité et donnez l'URL de leur documentation
-+
-.Répondre ici
-....
-Bibliothèque 1 : structopt
-Bibliothèque 2 : walkdir
++ bibliothèques utilisées :
+StructOpt: Perlet de personnaliser des commandes dans le terminal
+WalkDir : Permet de parcourirs les dossiers et de créer des variables contenant le chemin
+Audiotags: Permet de récupérer les méta-données de fichier mp3
+Serde: Permet de sauvegarder/charger des variables
+Colored: Permet de manipuler les couleurs dans le terminal pour aider au débuggage
+Markdown-gen: Permet de créer des fichier .md à partir d'un fichier .rs
 ....
 . Expliquez le rôle de chacun des modules/fichiers du projet et examinez attentivement les exportations (mot-clé `pub`)
-+
-.Répondre ici
++ Modules/fichier utilisées :
 ....
-Modules
-Fichiers
+Modules:
+main.rs: Module appelant les fonctions des autres modules pour concevoir le programme demandé, possède également des tests.
+cli.rs: Module gerant les commandes d'entrée SCAN et SEARCH dans le terminal.
+musicfile.rs: Module qui extrait les métadonnées d'une musique à partir de son path. Contient également les fonctions Save et Load permmettant de sauvegarder et charger les variables.
+scan.rs: Module scannant un dossier d'entrée et appellant l'extraction des métadonnées du module musicfile pour chaque fichier mp3 trouvés.
+search.rs: Module gérant les différentes requêtes de l'utilisateur, prend en entrée le vecteur de données généré par musicfile, et renvoi le vecteur de données de la requête. 
+write2md.rs: Module permettant de généré un fichier markdownn prend en entrée le nouveau vecteur de base de donnée.
 ....
+Fichiers:
+result.md: Fichier Markdown contenant le résultat de la requête.
+data.json: Fichier de sérialisation, contenant la sauvegarde du dossier scanné.
+
 
 == Structure de données initiale pour les fichiers audio
 Dans un premier temps, seuls les fichiers audio seront pris en compte.

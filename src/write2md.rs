@@ -4,6 +4,8 @@ use markdown_gen::*;
 use markdown_gen::markdown::AsMarkdown;
 use std::fs::File;
 
+/*Fonction qui à partir d'un vecteur MusicFile, génère un fichier Markdown
+contenant ses informations */
 pub fn write_result(music_data: Vec<MusicFile>) {
 
     let file = File::create("result.md").unwrap();
@@ -32,6 +34,8 @@ pub fn write_result(music_data: Vec<MusicFile>) {
     }
 }
 
+/* Fonction décapsulant des nombres/String afin de rendre le code plus propre et
+de pouvoir mettre deux variables options dans la même phrase*/
 fn uncap_string(entry: Option<&String>) -> &str {
     match &entry{
         None => "None",
